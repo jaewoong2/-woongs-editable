@@ -22,7 +22,7 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
-    'max-len': ['warn', { code: 80 }],
+    'max-len': ['warn', { code: 120 }],
     'prettier/prettier': ['error', { singleQuote: true, endOfLine: 'auto' }],
     'comma-dangle': ['error', 'always-multiline'],
     'linebreak-style': 0,
