@@ -1,4 +1,5 @@
 import { addDecorator } from '@storybook/react'
+import { ToastProvider } from '../src/context/ToastProvider'
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
@@ -10,4 +11,10 @@ export const parameters = {
   },
 }
 
-addDecorator((story) => <>{story()}</>)
+export const decorators = [
+  (Story) => (
+    <ToastProvider>
+      <Story />
+    </ToastProvider>
+  ),
+]
