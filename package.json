@@ -1,7 +1,7 @@
 {
-  "name": "@woongs/editable",
+  "name": "@woongs/toast",
   "version": "0.0.1",
-  "description": "Editable Editor for React",
+  "description": "Toast Message for React",
   "contributors": [
     "@jaewoong2 <jwisgenius@naver.com>"
   ],
@@ -9,7 +9,7 @@
     "editor",
     "react"
   ],
-  "repository": "jaewoong2/-woongs-editable",
+  "repository": "jaewoong2/-woongs-toast",
   "license": "MIT",
   "main": "build/cjs/index.js",
   "module": "build/esm/index.js",
