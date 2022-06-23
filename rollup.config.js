@@ -1,85 +1,29 @@
-import babel from '@rollup/plugin-babel'
+import peerDepsExternal from 'rollup-plugin-peer-deps-external'
+import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
-import { nodeResolve } from '@rollup/plugin-node-resolve'
+import typescript from 'rollup-plugin-typescript2'
 import pkg from './package.json'
-import replace from '@rollup/plugin-replace'
-import { terser } from 'rollup-plugin-terser'
-import { DEFAULT_EXTENSIONS as DEFAULT_BABEL_EXTENSIONS } from '@babel/core'
-import typescript from '@rollup/plugin-typescript'
 
-const { peerDependencies } = pkg
-const external = Object.keys(peerDependencies)
-
-const globals = {
-  react: 'React',
-  'react-dom': 'ReactDOM',
-  'react-is': 'ReactIs',
-}
-
-export default [
-  {
-    input: 'src/index.ts',
-    external,
-    output: {
+export default {
+  input: './src/index.ts',
+  output: [
+    {
+      file: pkg.main,
+      format: 'cjs',
       sourcemap: true,
-      file: 'build/umd/woongs-editor.js',
-      format: 'umd',
-      name: 'woongs-editor',
-      indent: false,
-      globals,
     },
-    plugins: [
-      replace({
-        preventAssignment: true,
-        values: {
-          'process.env.NODE_ENV': JSON.stringify('development'),
-        },
-      }),
-      typescript({
-        exclude: ['**/*.test.ts', '**/*.test.tsx', '**/*.stories.ts', '**/*.stories.tsx'],
-      }),
-      nodeResolve(),
-      commonjs({
-        include: 'node_modules/**',
-      }),
-      babel({
-        extensions: [...DEFAULT_BABEL_EXTENSIONS, '.ts', '.tsx'],
-        exclude: 'node_modules/**',
-        babelHelpers: 'runtime',
-      }),
-    ],
-  },
-  {
-    input: 'src/index.ts',
-    external,
-    output: {
-      sourcemap: false,
-      file: 'build/umd/woongs-editor.min.js',
-      format: 'umd',
-      name: 'woongs-editor',
-      indent: false,
-      globals,
+    {
+      file: pkg.module,
+      format: 'esm',
+      sourcemap: true,
     },
-    plugins: [
-      replace({
-        preventAssignment: true,
-        values: {
-          'process.env.NODE_ENV': JSON.stringify('production'),
-        },
-      }),
-      typescript({
-        exclude: ['**/*.test.ts', '**/*.test.tsx', '**/*.stories.ts', '**/*.stories.tsx'],
-      }),
-      nodeResolve(),
-      commonjs({
-        include: '/node_modules/',
-      }),
-      babel({
-        extensions: [...DEFAULT_BABEL_EXTENSIONS, '.ts', '.tsx'],
-        exclude: 'node_modules/**',
-        babelHelpers: 'runtime',
-      }),
-      terser(),
-    ],
-  },
-]
+  ],
+  plugins: [
+    peerDepsExternal(),
+    resolve(),
+    commonjs({
+      include: 'node_modules/**',
+    }),
+    typescript({ useTsconfigDeclarationDir: true, tsconfig: 'tsconfig.json' }),
+  ],
+}
