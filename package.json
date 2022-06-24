@@ -21,7 +21,7 @@
   "scripts": {
     "lint": "eslint ./src/ --ext .ts,.tsx --config .eslintrc.js",
     "build": "tsc --emitDeclarationOnly & rollup -c",
-    "publishing": "npm run build && npm version patch",
+    "publishing": "npm run build && npm version patch && npm publish",
     "storybook": "start-storybook -p 6006 --no-manager-cache",
     "build-storybook": "build-storybook"
   },
