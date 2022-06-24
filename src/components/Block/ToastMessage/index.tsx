@@ -15,6 +15,8 @@ type ToastMessageProps = {
   backgroundColor: string
   duration: number
   className: string
+  setHide: () => void
+  setIsHiding: (bool: boolean) => void
 }
 
 const ToastMessage: React.FC<ToastMessageProps> = ({
@@ -29,6 +31,8 @@ const ToastMessage: React.FC<ToastMessageProps> = ({
   duration,
   width,
   position,
+  setHide,
+  setIsHiding,
 }) => {
   const mounted = useMounted()
   const ref = useRef<HTMLDivElement>(null)
@@ -36,7 +40,24 @@ const ToastMessage: React.FC<ToastMessageProps> = ({
 
   useEffect(() => {
     setHeight(ref.current?.clientHeight ?? 0)
-  }, [height])
+  }, [ref.current])
+
+  useEffect(() => {
+    let hideTimer: null | NodeJS.Timeout = null
+    const hidingTimer = setTimeout(() => {
+      setIsHiding(true)
+      hideTimer = setTimeout(() => {
+        setHide()
+      }, 500)
+    }, duration)
+
+    return () => {
+      clearTimeout(hidingTimer)
+      if (hideTimer) {
+        clearTimeout(hideTimer)
+      }
+    }
+  }, [duration])
 
   if (!mounted) {
     return <></>

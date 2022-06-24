@@ -16,7 +16,7 @@ type ToastActionType = {
   // Set it`s border-radius
   setBorderRadius: (r: number) => void
   // Set it`s Message that is actually children in ToastMessage.tsx
-  setMessage: (msg?: string) => void
+  setMessage: (msg: string) => void
   // Set it`s background-color (default: #71A8EC)
   setBackgroundColor: (bg: string) => void
   // Set it`s duration
@@ -64,32 +64,11 @@ const ToastProvider: React.FC<Props> = ({ children }) => {
     setIsHiding(false)
   }
 
-  const handleMessage = (msg?: string) => {
-    setMessage(msg ?? '')
-  }
-
-  useEffect(() => {
-    if (isShow) {
-      const hidingTimer = setTimeout(() => {
-        setIsHiding(true)
-      }, duration / 2)
-
-      const hideTimer = setTimeout(() => {
-        setHide()
-      }, duration)
-
-      return () => {
-        clearTimeout(hidingTimer)
-        clearTimeout(hideTimer)
-      }
-    }
-  }, [duration, isShow])
-
   const actions = useMemo(() => {
     return {
       show: setShow,
       hide: setHide,
-      setMessage: handleMessage,
+      setMessage: (msg: string) => setMessage(msg),
       setBorderRadius: (radius: number) => setBorderRadius(radius),
       setDuration: (ms?: number) => setDuration(ms ?? 2000),
       setPosition: (pos: Position) => setPosition(pos),
@@ -114,9 +93,11 @@ const ToastProvider: React.FC<Props> = ({ children }) => {
           width={width}
           distance={distance}
           position={position}
-          duration={duration}
           hiding={isHiding}
+          duration={duration}
           className={className}
+          setHide={setHide}
+          setIsHiding={(bool: boolean) => setIsHiding(bool)}
         >
           {message}
         </ToastMessage>

@@ -43,7 +43,7 @@ const fadeIn = (postion: ToastProps['position'], distance: number, height: numbe
     }
 
     50% {
-      ${`${postion}: ${distance + 8}px`}
+      ${`${postion}: ${distance + 10}px`}
     }
 
     100% {
@@ -61,19 +61,11 @@ const fadeIn = (postion: ToastProps['position'], distance: number, height: numbe
 
 const fadeOut = (postion: ToastProps['position'], distance: number, height: number) => keyframes`
     50% {
-      ${`${postion}: ${distance}px`}
+      ${`${postion}: ${distance + 10}px`};
     }
 
     100% {
-      ${`${postion}: -${distance + height}px`}
-    }
-
-    50% {
-      opacity: 0.5;
-    }
-
-    to {
-      opacity: 0;
+      ${`${postion}: -${distance + height}px`};
     }
 `
 
@@ -99,12 +91,11 @@ export const Toast = styled.div<ToastProps>`
   color: ${({ color }) => color};
   ${({ position, distance }) => `${position}: ${distance}px`};
   ${({ subPosition }) => getSubPositionStyle(subPosition)};
-  animation: ${({ position, distance, height }) => fadeIn(position, distance, height)}
-    ${({ duration }) => (duration ? duration / 4 : 250)}ms ease-out;
-  ${({ hiding, duration, position, distance, height }) =>
+  animation: ${({ position, distance, height }) => fadeIn(position, distance, height)} 500ms ease-in-out;
+  ${({ hiding, position, distance, height }) =>
     hiding &&
     css`
-      animation: ${fadeOut(position, distance, height)} ${duration / 2}ms ease-in;
+      animation: ${fadeOut(position, distance, height)} 500ms ease-in;
     `}
 `
 
