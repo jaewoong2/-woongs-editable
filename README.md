@@ -5,7 +5,7 @@
 ### Very Simple & Easy Toast Message For You
 
 ### Version
-- `0.0.3`
+- `0.0.5`
 ### Storybook
 - `Getting Ready`
 ---
