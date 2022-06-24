@@ -22,7 +22,7 @@ export type ToastOptionType = {
   borderRadius?: number
 }
 
-export const useToast = (message?: string, options?: ToastOptionType) => {
+export const useToast = (message: string, options?: ToastOptionType) => {
   const {
     setMessage,
     setDuration,
