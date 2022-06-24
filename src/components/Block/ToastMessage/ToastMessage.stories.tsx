@@ -1,7 +1,8 @@
 import React from 'react'
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 import { ToastMessage } from './index'
-import { useToast } from '../../../hooks/useToast'
+import { useToast } from '@jaewoong2/toast'
+// import { useToast } from '../../../hooks/useToast'
 
 export default {
   title: 'Block/ToastMessage',
