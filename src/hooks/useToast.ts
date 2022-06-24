@@ -2,14 +2,23 @@ import { useContext, useEffect } from 'react'
 import { ToastActionContext } from '../context/ToastProvider'
 
 export type ToastOptionType = {
+  // ToastMessage Duration (dfault: 2000ms)
   duration?: number
+  // ToastMessage position (default: bottom)
   position?: 'top' | 'bottom'
+  // ToastMessage subPosition (default: center)
   subPosition?: 'center' | 'left' | 'right'
+  // ToastMessage background-color (default: #71A8EC)
   backgroundColor?: string
+  // ToastMessage distance (px) from position (default: 64px)
   distance?: number
+  // ToastMessage width (default: 400px)
   width?: number
+  // ToastMessage color ["black(default)" || "white"]
   color?: 'black' | 'white'
+  // ToastMessage className
   className?: string
+  // ToastMessage border-radius
   borderRadius?: number
 }
 

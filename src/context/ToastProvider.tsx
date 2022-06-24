@@ -9,17 +9,29 @@ type SubPosition = 'center' | 'left' | 'right'
 type Position = 'top' | 'bottom'
 
 type ToastActionType = {
+  // Show Toast Message which You can handle
   show: () => void
+  // Hide Toast Message which You can handle
   hide: () => void | null
+  // Set it`s border-radius
   setBorderRadius: (r: number) => void
+  // Set it`s Message that is actually children in ToastMessage.tsx
   setMessage: (msg?: string) => void
+  // Set it`s background-color (default: #71A8EC)
   setBackgroundColor: (bg: string) => void
+  // Set it`s duration
   setDuration: (ms?: number) => void
+  // Set it`s Text Color ["black(default)" || "white"]
   setColor: (color: 'black' | 'white') => void
+  // Set it`s Position ["bottom(default)" || "top"]
   setPosition: (position: Position) => void
+  // Set it`s SubPosition ["center(default)" || "left" || "right" ]
   setSubPosition: (position: SubPosition) => void
+  // Set it`s className
   setClassName: (className: string) => void
+  // Set it`s Distance from Position
   setDistance: (distance?: number) => void
+  // Set it`s Width
   setWidth: (px?: number) => void
 }
 
