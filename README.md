@@ -5,7 +5,8 @@
 ### Very Simple & Easy Toast Message For You
 
 ### Version
-- `0.0.5`
+- `0.0.7`
+- Be `1.0.0` When This Todo will Be Done.
 ### Storybook
 - `Getting Ready`
 ---
@@ -89,14 +90,14 @@ type ToastOptionType = {
 ```
 ---
 ## Next Todo
-1. CI/CD
+1. Deployment / Publish
 2. StroyBook Hosting
-3. Document Writing
-4. Add Option 
-   1. Animation Direction: "left to center" | "right to center"
-   2. FadeIn, FadeOut: 'slide' | 'fadein'
-   3. DarkMode
-   4. Type: "Error" / "Normal" / "Warn" / "Loading"
+3. ~~Document Writing~~
+4. Options (By Priority)
+   1. DarkMode 
+   2. Animation Direction: "left to center" | "right to center"
+   3. FadeIn, FadeOut: 'slide' | 'fadein'
+   4. Type: "Error" | "Normal" | "Warn" | "Loading"
    5. TimeOut Bar
 ---
 
