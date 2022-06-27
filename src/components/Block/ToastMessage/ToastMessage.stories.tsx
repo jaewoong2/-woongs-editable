@@ -1,6 +1,7 @@
 import React from 'react'
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 import { ToastMessage } from './index'
+// import { useToast } from '@jaewoong2/toast'
 import { useToast } from '../../../hooks/useToast'
 
 export default {
@@ -16,6 +17,10 @@ const Template: ComponentStory<typeof ToastMessage> = ({ ...options }) => {
   return (
     <div style={{ width: '400px', height: '400px', background: '#d9d9d9', position: 'relative' }}>
       <button onClick={() => show()}>Show</button>
+      <button onClick={() => show().success()}>success</button>
+      <button onClick={() => show().error()}>error</button>
+      <button onClick={() => show().warn()}>warn</button>
+      <button onClick={() => show().normal()}>normal</button>
       <button onClick={hide}>Hide</button>
     </div>
   )

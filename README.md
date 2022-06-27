@@ -5,7 +5,8 @@
 ### Very Simple & Easy Toast Message For You
 
 ### Version
-- `0.0.3`
+- `0.1.1`
+- Be `1.0.0` When This Todo will Be Done.
 ### Storybook
 - `Getting Ready`
 ---
@@ -74,9 +75,9 @@ type ToastOptionType = {
   subPosition?: 'center' | 'left' | 'right'
   // ToastMessage background-color (default: #71A8EC)
   backgroundColor?: string
-  // ToastMessage distance (px) from position (default: 64px)
+  // ToastMessage distance (px) from position (default: 32px)
   distance?: number
-  // ToastMessage width (default: 400px)
+  // ToastMessage width (default: 200px)
   width?: number
   // ToastMessage color ["black(default)" || "white"]
   color?: 'black' | 'white'
@@ -84,19 +85,21 @@ type ToastOptionType = {
   className?: string
   // ToastMessage border-radius
   borderRadius?: number
+  // ToastMessage Type [defulat: normal]
+  type: 'success' | 'error' | 'warn' | 'normal'
 }
 
 ```
 ---
 ## Next Todo
-1. CI/CD
+1. Deployment / Publish
 2. StroyBook Hosting
-3. Document Writing
-4. Add Option 
-   1. Animation Direction: "left to center" | "right to center"
-   2. FadeIn, FadeOut: 'slide' | 'fadein'
-   3. DarkMode
-   4. Type: "Error" / "Normal" / "Warn" / "Loading"
+3. ~~Document Writing~~
+4. Options (By Priority)
+   1. DarkMode 
+   2. Animation Direction: "left to center" | "right to center"
+   3. FadeIn, FadeOut: 'slide' | 'fadein'
+   4. ~~Type: "Error" | "Normal" | "Warn" | "Loading"~~
    5. TimeOut Bar
 ---
 

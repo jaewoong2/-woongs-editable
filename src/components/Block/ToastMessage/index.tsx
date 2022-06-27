@@ -11,6 +11,7 @@ type ToastMessageProps = {
   position: 'top' | 'bottom'
   color: 'white' | 'black'
   subPosition: 'left' | 'right' | 'center'
+  type: 'success' | 'error' | 'warn' | 'normal'
   borderRadius: number
   backgroundColor: string
   duration: number
@@ -32,6 +33,7 @@ const ToastMessage: React.FC<ToastMessageProps> = ({
   width,
   position,
   setHide,
+  type,
   setIsHiding,
 }) => {
   const mounted = useMounted()
@@ -76,7 +78,7 @@ const ToastMessage: React.FC<ToastMessageProps> = ({
       width={width}
       position={position}
     >
-      <Message borderRadius={borderRadius} backgroundColor={backgroundColor}>
+      <Message type={type} borderRadius={borderRadius} backgroundColor={backgroundColor}>
         {children}
       </Message>
     </Toast>
