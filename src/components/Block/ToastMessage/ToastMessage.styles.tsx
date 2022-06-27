@@ -14,8 +14,35 @@ type ToastProps = {
 }
 
 type MessageProps = {
+  type: 'success' | 'error' | 'warn' | 'normal'
   backgroundColor: string
   borderRadius: number
+}
+
+const getTypeStyle = (type: MessageProps['type']) => {
+  if (type === 'success') {
+    return css`
+      background-color: #2bbbad;
+    `
+  }
+
+  if (type === 'error') {
+    return css`
+      background-color: #d9534f;
+    `
+  }
+
+  if (type === 'warn') {
+    return css`
+      background-color: #f0ad4e;
+    `
+  }
+
+  if (type === 'normal') {
+    return css`
+      background-color: #777777;
+    `
+  }
 }
 
 const getSubPositionStyle = (subPosition: ToastProps['subPosition']) => {
@@ -88,6 +115,7 @@ export const Toast = styled.div<ToastProps>`
   display: flex;
   position: absolute;
   align-items: center;
+
   color: ${({ color }) => color};
   ${({ position, distance }) => `${position}: ${distance}px`};
   ${({ subPosition }) => getSubPositionStyle(subPosition)};
@@ -104,5 +132,6 @@ export const Message = styled.div<MessageProps>`
   display: flex;
   width: 100%;
   background-color: ${({ backgroundColor }) => backgroundColor};
+  ${({ type }) => getTypeStyle(type)}
   ${getTypoStyle()};
 `

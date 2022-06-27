@@ -4,7 +4,7 @@ import { ToastMessage } from '../components/Block/ToastMessage'
 type Props = {
   children?: React.ReactNode
 }
-
+type ToastType = 'success' | 'error' | 'warn' | 'normal'
 type SubPosition = 'center' | 'left' | 'right'
 type Position = 'top' | 'bottom'
 
@@ -31,8 +31,10 @@ type ToastActionType = {
   setClassName: (className: string) => void
   // Set it`s Distance from Position
   setDistance: (distance?: number) => void
-  // Set it`s Width
+  // Set it`s Width (default: 200)
   setWidth: (px?: number) => void
+  // Set it`s Type ['success' | 'error' | 'warn' | 'normal']
+  setType: (t: ToastType) => void
 }
 
 const initalToastAction = {} as ToastActionType
@@ -42,16 +44,19 @@ export const ToastActionContext = createContext({ ...initalToastAction })
 const ToastProvider: React.FC<Props> = ({ children }) => {
   const [isShow, setIsShow] = useState(false)
   const [isHiding, setIsHiding] = useState(false)
+
   const [message, setMessage] = useState('')
-  const [duration, setDuration] = useState(1000)
   const [backgroundColor, setBackgroundColor] = useState('#71a8ec')
   const [color, setColor] = useState<'white' | 'black'>('black')
   const [position, setPosition] = useState<Position>('bottom')
   const [subPosition, setSubPosition] = useState<SubPosition>('center')
-  const [distance, setDistance] = useState(64)
-  const [width, setWidth] = useState(400)
   const [className, setClassName] = useState('')
-  const [borderRadius, setBorderRadius] = useState(8)
+  const [type, setType] = useState<ToastType>('normal')
+
+  const [duration, setDuration] = useState(1000)
+  const [distance, setDistance] = useState(32)
+  const [width, setWidth] = useState(200)
+  const [borderRadius, setBorderRadius] = useState(4)
 
   const setShow = useCallback(() => {
     if (!isHiding) {
@@ -75,9 +80,10 @@ const ToastProvider: React.FC<Props> = ({ children }) => {
       setBackgroundColor: (c: string) => setBackgroundColor(c),
       setColor: (c: 'white' | 'black') => setColor(c),
       setSubPosition: (pos: SubPosition) => setSubPosition(pos),
-      setDistance: (px?: number) => setDistance(px ?? 64),
-      setWidth: (px?: number) => setWidth(px ?? 400),
+      setDistance: (px?: number) => setDistance(px ?? 32),
+      setWidth: (px?: number) => setWidth(px ?? 200),
       setClassName: (name: string) => setClassName(name),
+      setType: (t: ToastType) => setType(t),
     }
   }, [])
 
@@ -86,6 +92,7 @@ const ToastProvider: React.FC<Props> = ({ children }) => {
       {children}
       {isShow && (
         <ToastMessage
+          type={type}
           color={color}
           borderRadius={borderRadius}
           backgroundColor={backgroundColor}

@@ -1,6 +1,6 @@
-import { ToastProvider } from '@jaewoong2/toast'
 import { addDecorator } from '@storybook/react'
-// import { ToastProvider } from '../src/context/ToastProvider'
+// import { ToastProvider } from '@jaewoong2/toast'
+import { ToastProvider } from '../src/context/ToastProvider'
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
