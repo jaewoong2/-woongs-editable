@@ -75,9 +75,9 @@ type ToastOptionType = {
   subPosition?: 'center' | 'left' | 'right'
   // ToastMessage background-color (default: #71A8EC)
   backgroundColor?: string
-  // ToastMessage distance (px) from position (default: 64px)
+  // ToastMessage distance (px) from position (default: 32px)
   distance?: number
-  // ToastMessage width (default: 400px)
+  // ToastMessage width (default: 200px)
   width?: number
   // ToastMessage color ["black(default)" || "white"]
   color?: 'black' | 'white'
@@ -85,6 +85,8 @@ type ToastOptionType = {
   className?: string
   // ToastMessage border-radius
   borderRadius?: number
+  // ToastMessage Type [defulat: normal]
+  type: 'success' | 'error' | 'warn' | 'normal'
 }
 
 ```
@@ -97,7 +99,7 @@ type ToastOptionType = {
    1. DarkMode 
    2. Animation Direction: "left to center" | "right to center"
    3. FadeIn, FadeOut: 'slide' | 'fadein'
-   4. Type: "Error" | "Normal" | "Warn" | "Loading"
+   4. ~~Type: "Error" | "Normal" | "Warn" | "Loading"~~
    5. TimeOut Bar
 ---
 
