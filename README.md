@@ -8,7 +8,7 @@
 - `0.1.1`
 - Be `1.0.0` When This Todo will Be Done.
 ### Storybook
-- `Getting Ready`
+- https://bit.ly/3HXp45c
 ---
 ## Installation
 
