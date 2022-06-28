@@ -33,7 +33,7 @@
     "storybook": "start-storybook -p 6006 --no-manager-cache",
     "build-storybook": "build-storybook",
     "test": "react-scripts test",
-    "chromatic": "npx chromatic --project-token=4abe0d338c7a"
+    "chromatic": "npx chromatic --project-token=CHROMATIC_PROJECT_TOKEN"
   },
   "devDependencies": {
     "@babel/core": "^7.16.5",
