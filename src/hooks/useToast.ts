@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react'
+import { useCallback, useContext, useEffect } from 'react'
 import { ToastActionContext } from '../context/ToastProvider'
 
 export type ToastOptionType = {
@@ -41,10 +41,9 @@ export const useToast = (message: string, options?: ToastOptionType) => {
     hide,
   } = useContext(ToastActionContext)
 
-  useEffect(() => {
+  const onRest = useCallback(() => {
     setMessage(message)
     setDuration(options?.duration)
-    setPosition(options?.position ?? 'bottom')
     setDistance(options?.distance)
     setWidth(options?.width)
     setSubPosition(options?.subPosition ?? 'center')
@@ -52,39 +51,31 @@ export const useToast = (message: string, options?: ToastOptionType) => {
     setBackgroundColor(options?.backgroundColor ?? '#71a8ec')
     setColor(options?.color ?? 'black')
     setBorderRadius(options?.borderRadius ?? 4)
+    setPosition(options?.position ?? 'bottom')
     setType(options?.type ?? 'normal')
   }, [])
 
-  const onShow = () => {
+  useEffect(() => {
+    onRest()
+  }, [])
+
+  const onShowCallback = useCallback((callback: () => void) => {
+    hide()
+    callback()
+    show()
+  }, [])
+
+  const onShow = useCallback(() => {
+    onRest()
     show()
     return {
-      top: () => {
-        hide()
-        setPosition('top')
-        show()
-      },
-      success: () => {
-        hide()
-        setType('success')
-        show()
-      },
-      warn: () => {
-        hide()
-        setType('warn')
-        show()
-      },
-      error: () => {
-        hide()
-        setType('error')
-        show()
-      },
-      normal: () => {
-        hide()
-        setType('normal')
-        show()
-      },
+      top: () => onShowCallback(() => setPosition('top')),
+      success: () => onShowCallback(() => setType('success')),
+      error: () => onShowCallback(() => setType('error')),
+      warn: () => onShowCallback(() => setType('warn')),
+      normal: () => onShowCallback(() => setType('normal')),
     }
-  }
+  }, [])
 
   return { show: onShow, hide }
 }
