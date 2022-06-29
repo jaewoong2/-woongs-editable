@@ -8,7 +8,7 @@ export type ToastOptionType = {
   position?: 'top' | 'bottom'
   // ToastMessage subPosition (default: center)
   subPosition?: 'center' | 'left' | 'right'
-  // ToastMessage background-color (default: #71A8EC)
+  // ToastMessage background-color [default: #71A8EC]
   backgroundColor?: string
   // ToastMessage distance (px) from position (default: 32px)
   distance?: number
