@@ -41,7 +41,7 @@ export const useToast = (message: string, options?: ToastOptionType) => {
     hide,
   } = useContext(ToastActionContext)
 
-  const onRest = useCallback(() => {
+  const onReset = useCallback(() => {
     setMessage(message)
     setDuration(options?.duration)
     setDistance(options?.distance)
@@ -53,11 +53,11 @@ export const useToast = (message: string, options?: ToastOptionType) => {
     setBorderRadius(options?.borderRadius ?? 4)
     setPosition(options?.position ?? 'bottom')
     setType(options?.type ?? 'normal')
-  }, [])
+  }, [options])
 
   useEffect(() => {
-    onRest()
-  }, [])
+    onReset()
+  }, [options])
 
   const onShowCallback = useCallback((callback: () => void) => {
     hide()
@@ -66,7 +66,7 @@ export const useToast = (message: string, options?: ToastOptionType) => {
   }, [])
 
   const onShow = useCallback(() => {
-    onRest()
+    onReset()
     show()
     return {
       top: () => onShowCallback(() => setPosition('top')),
@@ -75,7 +75,7 @@ export const useToast = (message: string, options?: ToastOptionType) => {
       warn: () => onShowCallback(() => setType('warn')),
       normal: () => onShowCallback(() => setType('normal')),
     }
-  }, [])
+  }, [onReset])
 
   return { show: onShow, hide }
 }
