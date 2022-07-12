@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import useMounted from '../../../hooks/useMounted'
 import { Message, Toast } from './ToastMessage.styles'
 
@@ -61,12 +61,15 @@ const ToastMessage: React.FC<ToastMessageProps> = ({
     }
   }, [duration])
 
+  const ariaLive = type === 'error' || 'warn' ? 'assertive' : type === 'normal' || 'success' ? 'polite' : 'off'
+
   if (!mounted) {
     return <></>
   }
 
   return (
     <Toast
+      role="alert"
       ref={ref}
       color={color}
       className={className}
@@ -77,6 +80,7 @@ const ToastMessage: React.FC<ToastMessageProps> = ({
       hiding={hiding}
       width={width}
       position={position}
+      aria-live={ariaLive}
     >
       <Message type={type} borderRadius={borderRadius} backgroundColor={backgroundColor}>
         {children}
