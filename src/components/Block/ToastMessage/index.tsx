@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import useMounted from '../../../hooks/useMounted'
 import { Message, Toast } from './ToastMessage.styles'
 
@@ -11,7 +11,7 @@ type ToastMessageProps = {
   position: 'top' | 'bottom'
   color: 'white' | 'black'
   subPosition: 'left' | 'right' | 'center'
-  type: 'success' | 'error' | 'warn' | 'normal'
+  type?: 'success' | 'error' | 'warn' | 'normal'
   borderRadius: number
   backgroundColor: string
   duration: number

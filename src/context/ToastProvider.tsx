@@ -4,7 +4,7 @@ import { ToastMessage } from '../components/Block/ToastMessage'
 type Props = {
   children?: React.ReactNode
 }
-type ToastType = 'success' | 'error' | 'warn' | 'normal'
+type ToastType = 'success' | 'error' | 'warn' | 'normal' | undefined
 type SubPosition = 'center' | 'left' | 'right'
 type Position = 'top' | 'bottom'
 
@@ -51,7 +51,7 @@ const ToastProvider: React.FC<Props> = ({ children }) => {
   const [position, setPosition] = useState<Position>('bottom')
   const [subPosition, setSubPosition] = useState<SubPosition>('center')
   const [className, setClassName] = useState('')
-  const [type, setType] = useState<ToastType>('normal')
+  const [type, setType] = useState<ToastType>()
 
   const [duration, setDuration] = useState(1000)
   const [distance, setDistance] = useState(32)

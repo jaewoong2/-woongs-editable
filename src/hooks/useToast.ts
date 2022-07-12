@@ -21,7 +21,7 @@ export type ToastOptionType = {
   // ToastMessage border-radius
   borderRadius?: number
   // ToastMessage Type [defulat: normal]
-  type: 'success' | 'error' | 'warn' | 'normal'
+  type?: 'success' | 'error' | 'warn' | 'normal'
 }
 
 export const useToast = (message: string, options?: ToastOptionType) => {
@@ -52,7 +52,7 @@ export const useToast = (message: string, options?: ToastOptionType) => {
     setColor(options?.color ?? 'black')
     setBorderRadius(options?.borderRadius ?? 4)
     setPosition(options?.position ?? 'bottom')
-    setType(options?.type ?? 'normal')
+    setType(options?.type)
   }, [options])
 
   useEffect(() => {
