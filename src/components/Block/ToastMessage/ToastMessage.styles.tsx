@@ -5,7 +5,7 @@ type ToastProps = {
   width: number
   color?: 'white' | 'black'
   height: number
-  hiding: boolean
+  isFadeOutStart: boolean
   children: React.ReactNode
   distance: number
   subPosition: 'left' | 'right' | 'center'
@@ -132,8 +132,8 @@ export const Toast = styled.div<ToastProps>`
   ${({ subPosition }) => getSubPositionStyle(subPosition)};
 
   animation: ${({ position, distance, height }) => fadeIn(position, distance, height)} 500ms ease-in-out;
-  ${({ hiding, position, distance, height }) =>
-    hiding &&
+  ${({ isFadeOutStart, position, distance, height }) =>
+    isFadeOutStart &&
     css`
       animation: ${fadeOut(position, distance, height)} 500ms ease-in;
     `}
@@ -148,4 +148,14 @@ export const Message = styled.div<MessageProps>`
   background-color: ${({ backgroundColor }) => backgroundColor};
   ${({ type }) => getTypeStyle(type)}
   ${getTypoStyle()};
+`
+
+export const Button = styled.button`
+  position: absolute;
+  right: 10px;
+  border: none;
+  background-color: transparent;
+  font-size: 1.125em;
+  padding: 0;
+  cursor: pointer;
 `

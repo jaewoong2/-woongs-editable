@@ -4,6 +4,16 @@
 
 ### Very Simple & Easy Toast Message For You
 
+### This Toast Apply A11Y
+
+- Toast Message -> `role="alert"`
+- 'warn' & 'error' -> `aria-live="assertive"`
+- 'normal' & 'success' & 'not-defined' -> `aria-live="polite"`
+- `aria-live Will be 'off'` When Toast be hide
+- Close Button 
+- reference: https://sheribyrnehaber.medium.com/designing-toast-messages-for-accessibility-fb610ac364be
+
+
 ### Version
 - `0.1.7`
 - Be `1.0.0` When This Todo will Be Done.
@@ -114,7 +124,6 @@ type ToastOptionType = {
 ### type="warn"
 - aria-live = "assertive"
 - background-color = "#f0ad4e"
-
 
 ---
 ## Next Todo
