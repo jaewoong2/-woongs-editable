@@ -8,7 +8,7 @@ export type ToastOptionType = {
   position?: 'top' | 'bottom'
   // ToastMessage subPosition (default: center)
   subPosition?: 'center' | 'left' | 'right'
-  // ToastMessage background-color (default: #71A8EC)
+  // ToastMessage background-color [default: #71A8EC]
   backgroundColor?: string
   // ToastMessage distance (px) from position (default: 32px)
   distance?: number
@@ -21,7 +21,7 @@ export type ToastOptionType = {
   // ToastMessage border-radius
   borderRadius?: number
   // ToastMessage Type [defulat: normal]
-  type: 'success' | 'error' | 'warn' | 'normal'
+  type?: 'success' | 'error' | 'warn' | 'normal'
 }
 
 export const useToast = (message: string, options?: ToastOptionType) => {
@@ -41,7 +41,7 @@ export const useToast = (message: string, options?: ToastOptionType) => {
     hide,
   } = useContext(ToastActionContext)
 
-  const onRest = useCallback(() => {
+  const onReset = useCallback(() => {
     setMessage(message)
     setDuration(options?.duration)
     setDistance(options?.distance)
@@ -52,12 +52,12 @@ export const useToast = (message: string, options?: ToastOptionType) => {
     setColor(options?.color ?? 'black')
     setBorderRadius(options?.borderRadius ?? 4)
     setPosition(options?.position ?? 'bottom')
-    setType(options?.type ?? 'normal')
-  }, [])
+    setType(options?.type)
+  }, [options])
 
   useEffect(() => {
-    onRest()
-  }, [])
+    onReset()
+  }, [options])
 
   const onShowCallback = useCallback((callback: () => void) => {
     hide()
@@ -66,7 +66,7 @@ export const useToast = (message: string, options?: ToastOptionType) => {
   }, [])
 
   const onShow = useCallback(() => {
-    onRest()
+    onReset()
     show()
     return {
       top: () => onShowCallback(() => setPosition('top')),
@@ -75,7 +75,7 @@ export const useToast = (message: string, options?: ToastOptionType) => {
       warn: () => onShowCallback(() => setType('warn')),
       normal: () => onShowCallback(() => setType('normal')),
     }
-  }, [])
+  }, [onReset])
 
   return { show: onShow, hide }
 }

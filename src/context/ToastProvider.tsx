@@ -4,7 +4,7 @@ import { ToastMessage } from '../components/Block/ToastMessage'
 type Props = {
   children?: React.ReactNode
 }
-type ToastType = 'success' | 'error' | 'warn' | 'normal'
+type ToastType = 'success' | 'error' | 'warn' | 'normal' | undefined
 type SubPosition = 'center' | 'left' | 'right'
 type Position = 'top' | 'bottom'
 
@@ -43,7 +43,7 @@ export const ToastActionContext = createContext({ ...initalToastAction })
 
 const ToastProvider: React.FC<Props> = ({ children }) => {
   const [isShow, setIsShow] = useState(false)
-  const [isHiding, setIsHiding] = useState(false)
+  const [isFadeOutStart, setIsFadeOutStart] = useState(false)
 
   const [message, setMessage] = useState('')
   const [backgroundColor, setBackgroundColor] = useState('#71a8ec')
@@ -51,7 +51,7 @@ const ToastProvider: React.FC<Props> = ({ children }) => {
   const [position, setPosition] = useState<Position>('bottom')
   const [subPosition, setSubPosition] = useState<SubPosition>('center')
   const [className, setClassName] = useState('')
-  const [type, setType] = useState<ToastType>('normal')
+  const [type, setType] = useState<ToastType>()
 
   const [duration, setDuration] = useState(1000)
   const [distance, setDistance] = useState(32)
@@ -59,14 +59,14 @@ const ToastProvider: React.FC<Props> = ({ children }) => {
   const [borderRadius, setBorderRadius] = useState(4)
 
   const setShow = useCallback(() => {
-    if (!isHiding) {
+    if (!isFadeOutStart) {
       setIsShow(true)
     }
-  }, [isHiding])
+  }, [isFadeOutStart])
 
   const setHide = () => {
     setIsShow(false)
-    setIsHiding(false)
+    setIsFadeOutStart(false)
   }
 
   const actions = useMemo(() => {
@@ -100,11 +100,11 @@ const ToastProvider: React.FC<Props> = ({ children }) => {
           width={width}
           distance={distance}
           position={position}
-          hiding={isHiding}
+          isFadeOutStart={isFadeOutStart}
           duration={duration}
           className={className}
           setHide={setHide}
-          setIsHiding={(bool: boolean) => setIsHiding(bool)}
+          setIsFadeOutStart={(bool: boolean) => setIsFadeOutStart(bool)}
         >
           {message}
         </ToastMessage>

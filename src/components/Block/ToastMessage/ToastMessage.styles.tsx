@@ -5,7 +5,7 @@ type ToastProps = {
   width: number
   color?: 'white' | 'black'
   height: number
-  hiding: boolean
+  isFadeOutStart: boolean
   children: React.ReactNode
   distance: number
   subPosition: 'left' | 'right' | 'center'
@@ -14,7 +14,7 @@ type ToastProps = {
 }
 
 type MessageProps = {
-  type: 'success' | 'error' | 'warn' | 'normal'
+  type?: 'success' | 'error' | 'warn' | 'normal'
   backgroundColor: string
   borderRadius: number
 }
@@ -43,6 +43,8 @@ const getTypeStyle = (type: MessageProps['type']) => {
       background-color: #777777;
     `
   }
+
+  return css``
 }
 
 const getSubPositionStyle = (subPosition: ToastProps['subPosition']) => {
@@ -94,6 +96,14 @@ const fadeOut = (postion: ToastProps['position'], distance: number, height: numb
     100% {
       ${`${postion}: -${distance + height}px`};
     }
+
+    50% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 0;
+    }
 `
 
 const getTypoStyle = () => {
@@ -117,11 +127,13 @@ export const Toast = styled.div<ToastProps>`
   align-items: center;
 
   color: ${({ color }) => color};
+
   ${({ position, distance }) => `${position}: ${distance}px`};
   ${({ subPosition }) => getSubPositionStyle(subPosition)};
+
   animation: ${({ position, distance, height }) => fadeIn(position, distance, height)} 500ms ease-in-out;
-  ${({ hiding, position, distance, height }) =>
-    hiding &&
+  ${({ isFadeOutStart, position, distance, height }) =>
+    isFadeOutStart &&
     css`
       animation: ${fadeOut(position, distance, height)} 500ms ease-in;
     `}
@@ -131,7 +143,19 @@ export const Message = styled.div<MessageProps>`
   border-radius: ${({ borderRadius }) => borderRadius}px;
   display: flex;
   width: 100%;
+  box-shadow: 1px 1px 4px #18181895;
+
   background-color: ${({ backgroundColor }) => backgroundColor};
   ${({ type }) => getTypeStyle(type)}
   ${getTypoStyle()};
+`
+
+export const Button = styled.button`
+  position: absolute;
+  right: 10px;
+  border: none;
+  background-color: transparent;
+  font-size: 1.125em;
+  padding: 0;
+  cursor: pointer;
 `

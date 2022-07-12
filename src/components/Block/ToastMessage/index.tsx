@@ -1,29 +1,29 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import useMounted from '../../../hooks/useMounted'
-import { Message, Toast } from './ToastMessage.styles'
+import { Button, Message, Toast } from './ToastMessage.styles'
 
 type ToastMessageProps = {
   children?: React.ReactNode | string
   height?: number
   width: number
-  hiding: boolean
+  isFadeOutStart: boolean
   distance: number
   position: 'top' | 'bottom'
   color: 'white' | 'black'
   subPosition: 'left' | 'right' | 'center'
-  type: 'success' | 'error' | 'warn' | 'normal'
+  type?: 'success' | 'error' | 'warn' | 'normal'
   borderRadius: number
   backgroundColor: string
   duration: number
   className: string
   setHide: () => void
-  setIsHiding: (bool: boolean) => void
+  setIsFadeOutStart: (bool: boolean) => void
 }
 
 const ToastMessage: React.FC<ToastMessageProps> = ({
   children,
   className,
-  hiding,
+  isFadeOutStart,
   distance,
   color,
   backgroundColor,
@@ -34,32 +34,42 @@ const ToastMessage: React.FC<ToastMessageProps> = ({
   position,
   setHide,
   type,
-  setIsHiding,
+  setIsFadeOutStart,
 }) => {
   const mounted = useMounted()
   const ref = useRef<HTMLDivElement>(null)
+
   const [height, setHeight] = useState<number>(0)
+  const [ariaLive, setAriaLive] = useState<'polite' | 'assertive' | 'off'>(
+    type === 'error' || 'warn' ? 'assertive' : 'polite',
+  )
 
-  useEffect(() => {
-    setHeight(ref.current?.clientHeight ?? 0)
-  }, [ref.current])
-
-  useEffect(() => {
+  const handleFadeOut = useCallback(() => {
     let hideTimer: null | NodeJS.Timeout = null
-    const hidingTimer = setTimeout(() => {
-      setIsHiding(true)
+
+    const fadeOutTimer = setTimeout(() => {
+      setIsFadeOutStart(true)
+      setAriaLive('off')
       hideTimer = setTimeout(() => {
         setHide()
       }, 500)
     }, duration)
 
     return () => {
-      clearTimeout(hidingTimer)
+      clearTimeout(fadeOutTimer)
       if (hideTimer) {
         clearTimeout(hideTimer)
       }
     }
   }, [duration])
+
+  useEffect(() => {
+    setHeight(ref.current?.clientHeight ?? 0)
+  }, [ref.current])
+
+  useEffect(() => {
+    return handleFadeOut()
+  }, [handleFadeOut])
 
   if (!mounted) {
     return <></>
@@ -67,6 +77,8 @@ const ToastMessage: React.FC<ToastMessageProps> = ({
 
   return (
     <Toast
+      tabIndex={0}
+      role="alert"
       ref={ref}
       color={color}
       className={className}
@@ -74,13 +86,17 @@ const ToastMessage: React.FC<ToastMessageProps> = ({
       height={height}
       distance={distance}
       duration={duration}
-      hiding={hiding}
+      isFadeOutStart={isFadeOutStart}
       width={width}
       position={position}
+      aria-live={ariaLive}
     >
-      <Message type={type} borderRadius={borderRadius} backgroundColor={backgroundColor}>
+      <Message tabIndex={0} type={type} borderRadius={borderRadius} backgroundColor={backgroundColor}>
         {children}
       </Message>
+      <Button onClick={setHide} type="button" aria-label="close button">
+        &times;
+      </Button>
     </Toast>
   )
 }

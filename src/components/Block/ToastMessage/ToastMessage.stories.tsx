@@ -28,7 +28,7 @@ const Template: ComponentStory<typeof ToastMessage> = ({ ...options }) => {
 
 export const Primary = Template.bind({})
 Primary.args = {
-  children: 'Toast Message',
+  children: <strong>Html Tag in hildren</strong>,
   className: 'toastMessage',
   distance: 32,
   color: 'black',
