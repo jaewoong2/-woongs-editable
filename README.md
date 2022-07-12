@@ -7,9 +7,11 @@
 ### Version
 - `0.1.5`
 - Be `1.0.0` When This Todo will Be Done.
+  
 ### Storybook
 - https://bit.ly/3yqQA6X
 ---
+
 ## Installation
 
 ### yarn
@@ -47,16 +49,19 @@ const App = () => {
 
 ### useToast Call
 ```tsx
-import { useToast } from '@jaewoong2/toast'
+import { useToast, ToastOptionType } from '@jaewoong2/toast'
 
-const ChildrenComponent = () => {
-   const { show, hide } = useToast('Toast Message', options);
+const ChildrenComponent = ({ toastOptions }: { toastOptions: ToastOptionType }) => {
+   const { show, hide } = useToast('Toast Message', { ...toastOptions });
    
    return (
       <div>
-        <button onClick={show}>Show Button</button>
-        <button onClick={() => show().top()}>Show Top</button>
-        <button onClick={hide}>Hide Button</button>
+         <button onClick={() => show()}>Show</button>
+         <button onClick={() => show().success()}>success</button>
+         <button onClick={() => show().error()}>error</button>
+         <button onClick={() => show().warn()}>warn</button>
+         <button onClick={() => show().normal()}>normal</button>
+         <button onClick={hide}>Hide Button</button>
       </div>
    )
 }
@@ -85,11 +90,32 @@ type ToastOptionType = {
   className?: string
   // ToastMessage border-radius
   borderRadius?: number
-  // ToastMessage Type [defulat: normal]
-  type: 'success' | 'error' | 'warn' | 'normal'
+  // ToastMessage Type 
+  type?: 'success' | 'error' | 'warn' | 'normal'
 }
-
 ```
+
+### Not define type
+- aria-live = "polite"
+- background-color = Defined BackgroundColor / Default BackgroundColor
+
+### type="success"
+- aria-live = "polite"
+- background-color = "#2bbbad"
+
+### type="normal"
+- aria-live = "polite"
+- background-color = "#777777"
+
+### type="error"
+- aria-live = "assertive"
+- background-color = "#d9534f"
+
+### type="warn"
+- aria-live = "assertive"
+- background-color = "#f0ad4e"
+
+
 ---
 ## Next Todo
 1. Deployment / Publish

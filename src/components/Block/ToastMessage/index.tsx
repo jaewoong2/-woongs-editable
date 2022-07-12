@@ -61,7 +61,7 @@ const ToastMessage: React.FC<ToastMessageProps> = ({
     }
   }, [duration])
 
-  const ariaLive = type === 'error' || 'warn' ? 'assertive' : type === 'normal' || 'success' ? 'polite' : 'off'
+  const ariaLive = type === 'error' || 'warn' ? 'assertive' : 'polite'
 
   if (!mounted) {
     return <></>
