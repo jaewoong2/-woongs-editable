@@ -5,7 +5,7 @@
 ### Very Simple & Easy Toast Message For You
 
 ### Version
-- `0.1.5`
+- `0.1.7`
 - Be `1.0.0` When This Todo will Be Done.
   
 ### Storybook
