@@ -85,7 +85,9 @@
   "peerDependencies": {
     "react": ">=16",
     "react-dom": ">=16",
-    "react-is": ">=16"
+    "react-is": ">=16",
+    "@emotion/react": "^11.7.1",
+    "@emotion/styled": "^11.6.0"
   },
   "prettier": {
     "parser": "typescript",
