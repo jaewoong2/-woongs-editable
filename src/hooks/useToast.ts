@@ -24,7 +24,7 @@ export type ToastOptionType = {
   type?: 'success' | 'error' | 'warn' | 'normal'
 }
 
-export const useToast = (message: string, options?: ToastOptionType) => {
+export const useToast = (message: string, initOptions?: ToastOptionType) => {
   const {
     setMessage,
     setDuration,
@@ -41,7 +41,7 @@ export const useToast = (message: string, options?: ToastOptionType) => {
     hide,
   } = useContext(ToastActionContext)
 
-  const onReset = useCallback(() => {
+  const onReset = useCallback((options: ToastOptionType = initOptions ?? {}) => {
     setMessage(message)
     setDuration(options?.duration)
     setDistance(options?.distance)
@@ -53,11 +53,11 @@ export const useToast = (message: string, options?: ToastOptionType) => {
     setBorderRadius(options?.borderRadius ?? 4)
     setPosition(options?.position ?? 'bottom')
     setType(options?.type)
-  }, [options])
+  }, [])
 
   useEffect(() => {
-    onReset()
-  }, [options])
+    onReset(initOptions)
+  }, [initOptions])
 
   const onShowCallback = useCallback((callback: () => void) => {
     hide()
@@ -65,17 +65,20 @@ export const useToast = (message: string, options?: ToastOptionType) => {
     show()
   }, [])
 
-  const onShow = useCallback(() => {
-    onReset()
-    show()
-    return {
-      top: () => onShowCallback(() => setPosition('top')),
-      success: () => onShowCallback(() => setType('success')),
-      error: () => onShowCallback(() => setType('error')),
-      warn: () => onShowCallback(() => setType('warn')),
-      normal: () => onShowCallback(() => setType('normal')),
-    }
-  }, [onReset])
+  const onShow = useCallback(
+    (options?: ToastOptionType) => {
+      onReset(options)
+      show()
+      return {
+        top: () => onShowCallback(() => setPosition('top')),
+        success: () => onShowCallback(() => setType('success')),
+        error: () => onShowCallback(() => setType('error')),
+        warn: () => onShowCallback(() => setType('warn')),
+        normal: () => onShowCallback(() => setType('normal')),
+      }
+    },
+    [onReset],
+  )
 
   return { show: onShow, hide }
 }

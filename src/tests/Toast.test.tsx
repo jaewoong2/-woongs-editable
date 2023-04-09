@@ -13,7 +13,7 @@ const TestBox = ({ message, ...props }: ToastOptionType & { message: string }) =
 
   return (
     <div>
-      <button onClick={show}>Show</button>
+      <button onClick={() => show()}>Show</button>
       <button onClick={hide}>Hide</button>
     </div>
   )
