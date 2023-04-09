@@ -15,7 +15,8 @@
 
 
 ### Version
-- `0.1.7`
+- `0.1.8`
+- *(latest) Hook 사용시, 옵션추가 가능 하도록 DX 개선*
 - Be `1.0.0` When This Todo will Be Done.
   
 ### Storybook
