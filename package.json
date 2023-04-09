@@ -29,7 +29,7 @@
     "git": "git add . && git commit -m 'publish' && git push",
     "build": "tsc --emitDeclarationOnly & rollup -c",
     "publish:patch": "npm run git && npm run build && npm version patch && npm publish --access=public",
-    "publish:minor": "npm run git && npm run build && npm version minor && npm publish",
+    "publish:minor": "npm run git && npm run build && npm version minor && npm publish --access=public",
     "storybook": "start-storybook -p 6006 --no-manager-cache",
     "build-storybook": "build-storybook",
     "test": "react-scripts test",
