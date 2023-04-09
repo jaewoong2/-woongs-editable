@@ -28,7 +28,7 @@
     "lint": "eslint ./src/ --ext .ts,.tsx --config .eslintrc.js",
     "git": "git add . && git commit -m 'publish' && git push",
     "build": "tsc --emitDeclarationOnly & rollup -c",
-    "publish:patch": "npm run git && npm run build && npm version patch && npm publish",
+    "publish:patch": "npm run git && npm run build && npm version patch && npm publish --access=public",
     "publish:minor": "npm run git && npm run build && npm version minor && npm publish",
     "storybook": "start-storybook -p 6006 --no-manager-cache",
     "build-storybook": "build-storybook",
