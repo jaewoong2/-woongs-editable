@@ -62,6 +62,9 @@ const App = () => {
 ```tsx
 import { useToast, ToastOptionType } from '@jaewoong2/toast'
 
+/**
+ * show(options) - you can write option in show parameter.
+*/
 const ChildrenComponent = ({ toastOptions }: { toastOptions: ToastOptionType }) => {
    const { show, hide } = useToast('Toast Message', { ...toastOptions });
    
